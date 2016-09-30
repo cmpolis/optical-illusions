@@ -1,6 +1,6 @@
 //
-//
-//
+// Output of code available at:
+// http://www.bytemuse.com/post/optical-illusions-d3-part-i/
 var container = d3.select('#illusion-container'),
     identity = function(d) { return d; },
     _reveal = function() { this.attr('reveal', this.attr('reveal') === '' ? null : ''); };
@@ -15,8 +15,8 @@ var cafewall = function(svg, width) {
       tileOffsets = d3.range(0,12).map(function(d) {
         return Math.sin(Math.PI * (d / 4)) * tileWidth;
       });
+      
   svg.attr('height', height).attr('width', width);
-
   svg.selectAll('.h-line').data(yTicks).enter()
     .append('line').attr('class', 'h-line')
     .attr('x1', 0).attr('x2', width)
@@ -28,19 +28,18 @@ var cafewall = function(svg, width) {
       .attr('class', 'tile-group')
       .attr('transform', function(d, ndx) {
         return 'translate('+(tileOffsets[ndx] - 10)+','+d+')' });
-
   svg.selectAll('.tile-group')
     .selectAll('rect').data(d3.range(-1,7))
     .enter().append('rect')
       .attr('x', function(d) { return d * tileWidth * 2; })
       .attr('width', tileWidth)
       .attr('height', tileHeight);
+
   this.reveal = _reveal.bind(svg);
 };
 
-
 //
-// Ehrenstein Illusion: Square inside a bunch of rects
+// Ehrenstein Illusion: Square inside a bunch of circles
 var ehrenstein = function(svg, width) {
   var height = width * 0.667,
       dRadii = height / 40,
